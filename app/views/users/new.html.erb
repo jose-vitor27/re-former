@@ -1,0 +1,65 @@
+<!-- Formulário HTML puro (para referência) -->
+<!--
+  <form action="/users" method="post" accept-charset="UTF-8" data-turbo="false">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="user[username]">
+    <br>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="user[email]">
+    <br>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="user[password]">
+    <br>
+
+    <input type="submit" value="Create User">
+  </form>
+  -->
+
+<!-- Formulário com form_tag (para referência) -->
+<!--
+<%= form_tag("/users", method: :post) do %>
+  <%= label_tag(:username, "Username") %>
+  <%= text_field_tag(:username, nil) %>
+    <br>
+
+    <%= label_tag(:email, "Email") %>
+  <%= email_field_tag(:email, nil) %>
+    <br>
+
+    <%= label_tag(:password, "Password") %>
+  <%= password_field_tag(:password, nil) %>
+    <br>
+
+    <%= submit_tag("Create User") %>
+<% end %>
+-->
+<% if @user.errors.any? %>
+  <div style="color: red;">
+    <h2><%= pluralize(@user.errors.count, "erro") %> impediu que este usuário fosse
+      salvo:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user do |form| %>
+  <%= form.label :username, "Nome de usuario:" %><br>
+  <%= form.text_field :username, placeholder: "Digite seu username", autofocus: true %>
+  <br>
+
+  <%= form.label :email, "E-mail:" %><br>
+  <%= form.email_field :email, placeholder: "seu@email.com" %>
+  <br>
+
+  <%= form.label :password, "Senha:" %><br>
+  <%= form.password_field :password, placeholder: "Mínimo 6 caracteres" %>
+  <br>
+
+  <%= form.submit "Create User" %>
+<% end %>

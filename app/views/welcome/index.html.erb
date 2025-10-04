@@ -1,0 +1,47 @@
+<h1>Re-Former - Gerenciamento de Usuários</h1>
+
+<div style="margin-top: 30px;">
+  <div style="border: 2px solid #4CAF50; padding: 20px; margin-bottom: 20px; border-radius:
+    5px;">
+    <h2>Novo Usuário</h2>
+    <p>Criar um novo usuário no sistema</p>
+    <%= link_to "Ir para Novo Usuário", new_user_path, style: "background-color: #4CAF50;
+  color: white; padding: 10px 20px; text-decoration: none; border-radius: 3px; display:
+  inline-block;" %>
+  </div>
+
+  <div style="border: 2px solid #2196F3; padding: 20px; border-radius: 5px;">
+    <h2>Editar Usuário</h2>
+    <p>Escolha um usuário existente para editar:</p>
+
+    <% if @users.any? %>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <thead>
+        <tr style="background-color: #f2f2f2;">
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">ID</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Username</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Email</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><%= user.id %></td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><%= user.username %></td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><%= user.email %></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              <%= link_to "Editar", edit_user_path(user), style: "background-color:
+  #2196F3; color: white; padding: 5px 15px; text-decoration: none; border-radius: 3px; display:
+   inline-block;" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p style="color: #999; margin-top: 15px;">Nenhum usuário cadastrado ainda. Crie um novo
+        usuário primeiro!</p>
+    <% end %>
+  </div>
+</div>
